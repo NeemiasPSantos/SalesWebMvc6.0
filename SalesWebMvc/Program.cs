@@ -6,8 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 var connectString = builder.Configuration.GetConnectionString("SalesWebMvcContext");
 
 builder.Services.AddDbContext<SalesWebMvcContext>(options =>
-    options.UseMySql(builder.Configuration.GetConnectionString(connectString),
-    new MySqlServerVersion(new Version(8,0,30))));
+    options.UseMySql(builder.Configuration.GetConnectionString("SalesWebMvcContext"),
+    MySqlServerVersion.AutoDetect(connectString)));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
